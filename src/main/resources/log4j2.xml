@@ -11,7 +11,7 @@
             </PatternLayout>
         </File>
 
-        <RollingFile name="LogToRollingFile" fileName="logs/rollingApp.log"
+        <!-- <RollingFile name="LogToRollingFile" fileName="logs/rollingApp.log"
             filePattern="logs/$${date:yyyy-MM}/rollingApp-%d{MM-dd-yyyy}-%i.log.gz">
             <PatternLayout>
                 <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
@@ -20,14 +20,32 @@
                 <TimeBasedTriggeringPolicy />
                 <SizeBasedTriggeringPolicy size="10 MB" />
             </Policies>
-        </RollingFile>
+        </RollingFile> -->
+
+        <RollingRandomAccessFile name="LogToRollingRandomAccessFile" fileName="logs/asyncApp.log"
+            filePattern="logs/$${date:yyyy-MM}/asyncApp-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="1 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="5" />
+        </RollingRandomAccessFile>
+
+        <Async name="Async">
+            <!-- reference to other appenders -->
+            <AppenderRef ref="LogToRollingRandomAccessFile" />
+        </Async>
     </Appenders>
     <Loggers>
         <!-- <Root level="info"> -->
         <Root level="debug">
             <AppenderRef ref="LogToConsole" />
             <!-- <AppenderRef ref="LogToFile" /> -->
-            <AppenderRef ref="LogToRollingFile" />
+            <!-- <AppenderRef ref="LogToRollingFile" /> -->
+            <AppenderRef ref="Async" />
         </Root>
     </Loggers>
 </Configuration>
