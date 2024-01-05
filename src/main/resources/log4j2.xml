@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN">
+<Configuration>
     <Appenders>
-        <RollingFile name="XMLRollingfileAppender"
-            fileName="target/logfile.xml"
-            filePattern="target/logfile-%d{yyyy-MM-dd}-%i.log.gz">
-            <XMLLayout />
-            <Policies>
-                <SizeBasedTriggeringPolicy size="17 kB" />
-            </Policies>
-        </RollingFile>
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
     </Appenders>
     <Loggers>
-        <Logger name="XML_ROLLING_FILE_APPENDER"
-            level="INFO" additivity="false">
-            <AppenderRef ref="XMLRollingfileAppender" />
-        </Logger>
-        <Root level="TRACE">
-            <AppenderRef ref="ConsoleAppender" />
+        <Root level="info">
+            <AppenderRef ref="LogToConsole"/>
         </Root>
     </Loggers>
 </Configuration>

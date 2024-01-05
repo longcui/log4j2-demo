@@ -9,9 +9,13 @@ public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        // while( true) {
 
-        logger.info("Hello World!ss");
-        logger.debug("Hello World!fdsfds");
+            System.out.println("Hello world!");
+    
+            logger.info("Hello World!ss");
+            logger.debug("Hello World!fdsfds");
+            logger.error("Hello World! ERROR!!!!");
+        // }
     }
 }
